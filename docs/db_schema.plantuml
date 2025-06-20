@@ -1,0 +1,332 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class alembic_version {
+   version_num: varchar(32)
+}
+class alloy_content {
+   name: varchar
+   percentage: double precision
+   chemical_composition_id: integer
+   chemical_element_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class chemical_compositions {
+   source: varchar
+   material_description_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class chemical_elements {
+   symbol: varchar
+   name: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class environments {
+   description: varchar
+   param_environment_meaning: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class fatigue_tests {
+   description: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class hardness {
+   position: varchar
+   value: double precision
+   semi_product_id: integer
+   hardness_type_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class hardness_types {
+   name: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class load_modes {
+   param1_meaning: varchar
+   param2_meaning: varchar
+   param3_meaning: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class load_signals {
+   param1_meaning: varchar
+   param2_meaning: varchar
+   param3_meaning: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class loads {
+   order_number: integer
+   repetitions_count: integer
+   failure: boolean
+   param1_signal: double precision
+   param2_signal: double precision
+   param3_signal: double precision
+   param1_mode: double precision
+   param2_mode: double precision
+   param3_mode: double precision
+   fatigue_test_id: integer
+   load_mode_id: integer
+   load_signal_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class material_categories {
+   name: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class material_descriptions {
+   name: varchar
+   group: varchar
+   material_standard_name_id: integer
+   material_category_id: integer
+   material_subcategory_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class material_parameter_names {
+   name: varchar
+   unit: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class material_parameters {
+   value: varchar
+   commentary: varchar
+   material_description_id: integer
+   material_parameter_name_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class material_standard_names {
+   name: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class material_subcategories {
+   name: varchar
+   material_category_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class mediums {
+   description: varchar
+   param_medium_meaning: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class microstructures {
+   name: varchar
+   grain_size: double precision
+   crystal_structure: varchar
+   dislocation_density: double precision
+   image_file: varchar
+   material_description_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class semi_products {
+   dimension1: double precision
+   dimension2: double precision
+   dimension3: double precision
+   dimension4: double precision
+   material_description_id: integer
+   shape_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class shapes {
+   shape_type: varchar
+   dimension1_meaning: varchar
+   dimension2_meaning: varchar
+   dimension3_meaning: varchar
+   dimension4_meaning: varchar
+   drawing_file: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class specimen_fatigue_tests {
+   stress_level: double precision
+   number_of_cycles_at_end_of_test: integer
+   number_of_cycles_at_break: integer
+   is_run_out: boolean
+   is_valid: boolean
+   commentary: varchar
+   visuals: varchar
+   specimen_instance_id: integer
+   fatigue_test_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class specimen_instances {
+   instance_number: integer
+   specimen_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class specimen_locations {
+   location: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class specimen_orientations {
+   orientation: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class specimen_types {
+   param1_meaning: varchar
+   param2_meaning: varchar
+   param3_meaning: varchar
+   param4_meaning: varchar
+   param5_meaning: varchar
+   param6_meaning: varchar
+   param7_meaning: varchar
+   param8_meaning: varchar
+   param9_meaning: varchar
+   param10_meaning: varchar
+   param11_meaning: varchar
+   param12_meaning: varchar
+   drawing_file: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class specimens {
+   position: varchar
+   param1: double precision
+   param2: double precision
+   param3: double precision
+   param4: double precision
+   param5: double precision
+   param6: double precision
+   param7: double precision
+   param8: double precision
+   param9: double precision
+   param10: double precision
+   param11: double precision
+   param12: double precision
+   layout_file: varchar
+   drawing_file: varchar
+   specimen_type_id: integer
+   specimen_orientation_id: integer
+   specimen_location_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class stress_concentration_factors {
+   scf: varchar
+   value: double precision
+   origin: varchar
+   specimen_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class surface_roughness {
+   value: double precision
+   specimen_id: integer
+   surface_roughness_type_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class surface_roughness_types {
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class treatment_processes {
+   treatment_process_type: varchar
+   param1_meaning: varchar
+   param2_meaning: varchar
+   param3_meaning: varchar
+   param4_meaning: varchar
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+class treatments {
+   order_number: integer
+   param1: double precision
+   param2: double precision
+   param3: double precision
+   param4: double precision
+   param_environment: double precision
+   param_medium: double precision
+   semi_product_id: integer
+   treatment_process_id: integer
+   environment_id: integer
+   medium_id: integer
+   created_at: timestamp with time zone
+   updated_at: timestamp with time zone
+   id: integer
+}
+
+alloy_content                 -[#595959,plain]-^  chemical_compositions        : "chemical_composition_id:id"
+alloy_content                 -[#595959,plain]-^  chemical_elements            : "chemical_element_id:id"
+chemical_compositions         -[#595959,plain]-^  material_descriptions        : "material_description_id:id"
+hardness                      -[#595959,plain]-^  hardness_types               : "hardness_type_id:id"
+hardness                      -[#595959,plain]-^  semi_products                : "semi_product_id:id"
+loads                         -[#595959,plain]-^  fatigue_tests                : "fatigue_test_id:id"
+loads                         -[#595959,plain]-^  load_modes                   : "load_mode_id:id"
+loads                         -[#595959,plain]-^  load_signals                 : "load_signal_id:id"
+material_descriptions         -[#595959,plain]-^  material_categories          : "material_category_id:id"
+material_descriptions         -[#595959,plain]-^  material_standard_names      : "material_standard_name_id:id"
+material_descriptions         -[#595959,plain]-^  material_subcategories       : "material_subcategory_id:id"
+material_parameters           -[#595959,plain]-^  material_descriptions        : "material_description_id:id"
+material_parameters           -[#595959,plain]-^  material_parameter_names     : "material_parameter_name_id:id"
+material_subcategories        -[#595959,plain]-^  material_categories          : "material_category_id:id"
+microstructures               -[#595959,plain]-^  material_descriptions        : "material_description_id:id"
+semi_products                 -[#595959,plain]-^  material_descriptions        : "material_description_id:id"
+semi_products                 -[#595959,plain]-^  shapes                       : "shape_id:id"
+specimen_fatigue_tests        -[#595959,plain]-^  fatigue_tests                : "fatigue_test_id:id"
+specimen_fatigue_tests        -[#595959,plain]-^  specimen_instances           : "specimen_instance_id:id"
+specimen_instances            -[#595959,plain]-^  specimens                    : "specimen_id:id"
+specimens                     -[#595959,plain]-^  specimen_locations           : "specimen_location_id:id"
+specimens                     -[#595959,plain]-^  specimen_orientations        : "specimen_orientation_id:id"
+specimens                     -[#595959,plain]-^  specimen_types               : "specimen_type_id:id"
+stress_concentration_factors  -[#595959,plain]-^  specimens                    : "specimen_id:id"
+surface_roughness             -[#595959,plain]-^  specimens                    : "specimen_id:id"
+surface_roughness             -[#595959,plain]-^  surface_roughness_types      : "surface_roughness_type_id:id"
+treatments                    -[#595959,plain]-^  environments                 : "environment_id:id"
+treatments                    -[#595959,plain]-^  mediums                      : "medium_id:id"
+treatments                    -[#595959,plain]-^  semi_products                : "semi_product_id:id"
+treatments                    -[#595959,plain]-^  treatment_processes          : "treatment_process_id:id"
+@enduml
